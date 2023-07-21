@@ -1,7 +1,21 @@
 <template>
   <div class="container-fluid bg-light">
-    <section class="row justify-content-center">
-      <div class="col-6 bg-white elevation-3 my-4" v-if="account.id">
+    <section class="row justify-content-between">
+      <div class="col-3 bg-white elevation-3">
+        <div class="m-3 d-flex align-items-center">
+          <img class="img-fluid creator-img-lg" :src="account.picture" :alt="account.name">
+          <p class="fs-3 ms-3">{{ account.name }}</p>
+        </div>
+        <div v-if="account.bio">
+          {{ account.bio }}
+        </div>
+        <div class="d-flex flex-column justify-content-around fs-4">
+          <a v-if="account.linkedin" :href="account.linkedin"><i class="mdi mdi-linkedin"></i></a>
+          <a v-if="account.github" :href="account.github"><i class="mdi mdi-github"></i></a>
+          <a v-if="account.resume" :href="account.resume"><i class="mdi mdi-list-box-outline"></i></a>
+        </div>
+      </div>
+      <div class="col-5 bg-white elevation-3 my-4" v-if="account.id">
         <div class="mt-3">
           <p>
             <img class="img-fluid creator-img" :src="account.picture" :alt="account.name">
@@ -27,11 +41,18 @@
 
           </form>
       </div>
+      <div class="col-3" v-for="ad in ads" :key="ad.title">
+        <AdCard :ad="ad" />
+      </div>
     </section>
 
     <section class="row flex-column align-items-center">
       <div class="col-6 bg-white elevation-3 mb-4" v-for="post in posts" :key="post.id">
         <PostCard :post="post" />
+      </div>
+      
+      <div>
+        <PaginationComponent />
       </div>
     </section>
   </div>
@@ -42,44 +63,66 @@ import { computed, onMounted, ref } from 'vue';
 import Pop from '../utils/Pop.js';
 import { postsService } from '../services/PostsService.js';
 import { AppState } from '../AppState.js';
+import { adsService } from '../services/AdsService.js';
+import AdCard from '../components/AdCard.vue';
+import PaginationComponent from '../components/PaginationComponent.vue';
+
 
 export default {
+    setup() {
+        const editable = ref({});
 
-  setup() {
+        async function getPosts() {
+            try {
+                await postsService.getPosts();
+            }
+            catch (error) {
+                Pop.error(error.message);
+            }
+        }
 
-    const editable = ref({})
+        async function getAds() {
+            try {
+                await adsService.getAds();
+            }
+            catch (error) {
+                Pop.error(error.message);
+            }
+        }
 
-    async function getPosts(){
-      try {
-        await postsService.getPosts()
-      } catch (error) {
-        Pop.error(error.message)
-      }
-    }
+        onMounted(() => {
+            getPosts(),
+                getAds();
+        });
 
-    onMounted(() =>{
-      getPosts()
-    })
+        return {
+            editable,
 
-    return {
-    editable,
+            ads: computed(() => AppState.ads),
 
-    posts: computed(() => AppState.posts),
+            posts: computed(() => AppState.posts),
 
-    account: computed(() => AppState.account),
+            account: computed(() => AppState.account),
+            
+            async createPost() {
+                try {
+                    const postData = editable.value;
+                    await postsService.createPost(postData);
+                }
+                catch (error) {
+                    Pop.error(error.message);
+                }
+            },
 
-    async createPost(){
-      try {
-        const postData = editable.value
+            async editPost() {
+                const postData = editable.value;
+                await postsService.editPost(postData);
+                editable.value = {};
+            },
 
-        await postsService.createPost(postData)
-      } catch (error) {
-        Pop.error(error.message)
-      }
-    }
-
-    }
-  }
+        };
+    },
+    components: { AdCard, PaginationComponent }
 }
 </script>
 
@@ -107,6 +150,13 @@ export default {
 .creator-img{
     height: 5vh;
     width: 5vh;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+  }
+.creator-img-lg{
+    height: 10vh;
+    width: 10vh;
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
