@@ -1,0 +1,13 @@
+
+  {
+    "name": "thenetwork-vande",
+    "version": "1.0.0",
+    "scripts": {
+      "build": "npm run setup:server",
+      "setup:app": "npm run setup:server && npm run setup:client",
+      "setup:client": "cd TheNetwork-vande.client && npm i",
+      "setup:server": "cd TheNetwork-vande && npm i",
+      "start": "node TheNetwork-vande/index.js"
+    }
+  }
+  
