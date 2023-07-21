@@ -1,8 +1,11 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark teal-gradient-bg px-3">
+    <!-- FIXME Router doesn't work, not taken to home page? -->
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+        <p class="fs-3 m-3">
+          Network
+        </p>
       </div>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -12,9 +15,9 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
+          <!-- <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
             About
-          </router-link>
+          </router-link> -->
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
@@ -46,6 +49,11 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.teal-gradient-bg{
+  background: rgb(0,227,152);
+  background: linear-gradient(90deg, rgba(0,227,152,1) 0%, rgba(9,214,191,0.9444152661064426) 35%, rgba(161,235,250,0.8099614845938375) 100%);
 }
 
 @media screen and (min-width: 768px) {
