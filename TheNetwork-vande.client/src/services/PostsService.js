@@ -27,6 +27,22 @@ class PostsService {
     AppState.olderPage = res.data.older
   }
 
+  async getPostsByProfile(profileId) {
+    const res = await api.get('api/posts', {
+      params: {
+        creatorId: profileId
+      }
+    })
+
+    logger.log("Got Posts By Profile?", res.data)
+
+    AppState.posts = res.data.posts.map(pojo => new Post(pojo))
+
+    AppState.newerPage = res.data.newer
+
+    AppState.olderPage = res.data.older
+  }
+
   async createPost(postData) {
     const res = await api.post('/api/posts', postData)
 
