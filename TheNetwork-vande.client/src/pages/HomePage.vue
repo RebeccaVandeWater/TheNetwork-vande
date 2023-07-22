@@ -5,7 +5,7 @@
       <div class="col-3">
         <section class="row">
 
-          <div class="bg-white elevation-3 pb-5">
+          <div class="bg-white elevation-3 pb-5" v-if="account.id">
             <div class="m-3 d-flex align-items-center">
               <img class="img-fluid creator-img-lg" :src="account.picture" :alt="account.name">
               <p class="fs-3 ms-3">{{ account.name }}</p>

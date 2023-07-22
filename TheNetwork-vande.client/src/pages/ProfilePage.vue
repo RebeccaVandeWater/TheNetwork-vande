@@ -1,52 +1,67 @@
 <template>
   <div class="container-fluid debug" v-if="profile">
     <section class="row justify-content-center">
-      <div class="col-8 d-flex justify-content-center">
-          <img class="banner-style img-fluid" :src="profile.coverImg" :alt="profile.name">
-      </div>
-      <div class="col-3" v-for="ad in ads" :key="ad.title">
-        <AdCard :ad="ad" />
-      </div>
-      
-      <div class="col-10 my-4">
-        <div class="elevation-4 bg-white p-3 ">
-          <div class="d-flex align-items-center"> 
-            <img class="img-fluid rounded-circle creator-img-lg me-3" :src="profile.picture" :alt="profile.name">
-            <h1>
-              {{ profile.name }}
-            </h1>
-          </div>
-
-          <div>
-            <p v-if="profile.bio">
-              {{ profile.bio }}
-            </p>
-            <p >
-              {{ profile.class }}
-            </p>
-            <p>
-              <i class="mdi mdi-account-school" v-if="profile.graduated"></i>
-            </p>
+      <div class="col-9">
+        <section class="row flex-column justify-content-center">
+          <div class="col-12 d-flex justify-content-center">
+            <img class="banner-style img-fluid" :src="profile.coverImg" :alt="profile.name">
 
           </div>
+          <div class="col-12 d-flex align-items-center flex-column justify-content-around">
+            <div class="col-10 my-4">
+              <div class="elevation-4 bg-white p-3 ">
+                <div class="d-flex align-items-center"> 
+                  <img class="img-fluid rounded-circle creator-img-lg me-3" :src="profile.picture" :alt="profile.name">
+                  <h1>
+                    {{ profile.name }}
+                  </h1>
+                </div>
 
-          <div class="d-flex flex-column justify-content-around fs-4">
-          <a v-if="profile.linkedin" :href="profile.linkedin"><i class="mdi mdi-linkedin"></i></a>
-          <a v-if="profile.github" :href="profile.github"><i class="mdi mdi-github"></i></a>
-          <a v-if="profile.resume" :href="profile.resume"><i class="mdi mdi-list-box-outline"></i></a>
-        </div>
+                <div>
+                  <p v-if="profile.bio">
+                    {{ profile.bio }}
+                  </p>
+                  <p >
+                    {{ profile.class }}
+                  </p>
+                  <p>
+                    <i class="mdi mdi-account-school" v-if="profile.graduated"></i>
+                  </p>
 
-        </div>
+                </div>
+
+                <div class="d-flex flex-column justify-content-around fs-4">
+                <a v-if="profile.linkedin" :href="profile.linkedin"><i class="mdi mdi-linkedin"></i></a>
+                <a v-if="profile.github" :href="profile.github"><i class="mdi mdi-github"></i></a>
+                <a v-if="profile.resume" :href="profile.resume"><i class="mdi mdi-list-box-outline"></i></a>
+              </div>
+
+              </div>
+            </div>
+            <div class="col-6 bg-white elevation-3 mb-4" v-for="post in posts" :key="post.id">
+              <PostCard :post="post" />
+            </div>
+          </div>
+          <div class="col-12">
+            <PaginationComponent />
+          </div>
+
+        </section>
       </div>
+
+      <div class="col-3">
+        <section class="row">
+          <div class="col-12" v-for="ad in ads" :key="ad.title">
+            <AdCard :ad="ad" />
+          </div>
+        </section>
+      </div>
+
     </section>
 
     <section class="row flex-column align-items-center">
-      <div class="col-6 bg-white elevation-3 mb-4" v-for="post in posts" :key="post.id">
-        <PostCard :post="post" />
-      </div>
-      <div>
-        <PaginationComponent />
-      </div>
+      
+      
     </section>
   </div>
 </template>
