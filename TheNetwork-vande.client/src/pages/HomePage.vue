@@ -1,21 +1,32 @@
 <template>
   <div class="container-fluid bg-light">
     <section class="row justify-content-between">
-      <div class="col-3 bg-white elevation-3">
-        <div class="m-3 d-flex align-items-center">
-          <img class="img-fluid creator-img-lg" :src="account.picture" :alt="account.name">
-          <p class="fs-3 ms-3">{{ account.name }}</p>
-        </div>
-        <div v-if="account.bio">
-          {{ account.bio }}
-        </div>
-        <div class="d-flex flex-column justify-content-around fs-4">
-          <a v-if="account.linkedin" :href="account.linkedin"><i class="mdi mdi-linkedin"></i></a>
-          <a v-if="account.github" :href="account.github"><i class="mdi mdi-github"></i></a>
-          <a v-if="account.resume" :href="account.resume"><i class="mdi mdi-list-box-outline"></i></a>
-        </div>
+
+      <div class="col-3">
+        <section class="row">
+
+          <div class="bg-white elevation-3 pb-5">
+            <div class="m-3 d-flex align-items-center">
+              <img class="img-fluid creator-img-lg" :src="account.picture" :alt="account.name">
+              <p class="fs-3 ms-3">{{ account.name }}</p>
+            </div>
+            <div v-if="account.bio">
+              {{ account.bio }}
+            </div>
+            <div class="d-flex flex-column justify-content-around fs-4 pb-5">
+              <a v-if="account.linkedin" :href="account.linkedin"><i class="mdi mdi-linkedin"></i></a>
+              <a v-if="account.github" :href="account.github"><i class="mdi mdi-github"></i></a>
+              <a v-if="account.resume" :href="account.resume"><i class="mdi mdi-list-box-outline"></i></a>
+            </div>
+          </div>
+
+        </section>
       </div>
-      <div class="col-5 bg-white elevation-3 my-4" v-if="account.id">
+
+      <div class="col-6">
+      <section class="row flex-column align-items-center">
+
+      <div class="col-10 bg-white elevation-3 my-4" v-if="account.id">
         <div class="mt-3">
           <p>
             <img class="img-fluid creator-img" :src="account.picture" :alt="account.name">
@@ -40,16 +51,26 @@
             </div>
 
           </form>
-      </div>
-      <div class="col-3" v-for="ad in ads" :key="ad.title">
-        <AdCard :ad="ad" />
-      </div>
+        </div>
+        <div class="col-10 bg-white elevation-3 mb-4" v-for="post in posts" :key="post.id">
+          <PostCard :post="post" />
+        </div>
+
+      </section>
+    </div>
+
+    <div class="col-md-3">
+      <section class="row flex-column">
+
+        <div class="col-12" v-for="ad in ads" :key="ad.title">
+          <AdCard :ad="ad" />
+        </div>
+
+      </section>
+    </div>
     </section>
 
-    <section class="row flex-column align-items-center">
-      <div class="col-6 bg-white elevation-3 mb-4" v-for="post in posts" :key="post.id">
-        <PostCard :post="post" />
-      </div>
+    <section class="row">
       
       <div>
         <PaginationComponent />

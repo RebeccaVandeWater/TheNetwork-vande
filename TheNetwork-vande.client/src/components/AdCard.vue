@@ -1,6 +1,6 @@
 <template>
-  <div>
-<img class="img-fluid" :src="ad.tall" :alt="ad.title">
+  <div class="mb-5">
+<img class="img-fluid img-size" :src="ad.tall" :alt="ad.title">
   </div>
 </template>
 
@@ -21,5 +21,7 @@ export default {
 
 
 <style lang="scss" scoped>
-
+.img-size{
+  height: 50vh;
+}
 </style>
