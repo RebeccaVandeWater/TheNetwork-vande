@@ -5,15 +5,15 @@
         <img class="banner-style img-fluid flex-fill" :src="profile.coverImg" :alt="profile.name">
       </div>
 
-      <div class="col-md-3 col-12 mt-2">
+      <div class="col-md-6 col-12 mt-2">
         <div class="bg-white elevation-3 p-3" v-if="account.id">
-          <ProfileCard />
+          <SelectedUserProfileCard />
         </div>
       </div>
 
       <div class="col-md-6 col-12">
 
-          <div class="bg-white elevation-3 my-2" v-if="account.id">
+          <div class="bg-white elevation-3 my-2" v-if="account.id == selectedProfile.id">
             <CreatePostCard />
           </div>
           <div class="bg-white elevation-3 my-2" v-for="post in posts" :key="post.id">
@@ -21,12 +21,6 @@
           </div>
           <div>
             <PaginationComponent />
-          </div>
-      </div>
-
-      <div class="col-md-3 col-12">
-          <div v-for="ad in ads" :key="ad.title">
-            <AdCard :ad="ad" />
           </div>
       </div>
 
@@ -39,7 +33,6 @@ import { useRoute } from 'vue-router'
 import Pop from '../utils/Pop.js'
 import { profilesService } from '../services/ProfilesService.js'
 import { computed, onMounted } from 'vue'
-import AdCard from '../components/AdCard.vue'
 import { AppState } from '../AppState.js'
 import { adsService } from '../services/AdsService.js'
 import { postsService } from '../services/PostsService.js'
@@ -87,10 +80,10 @@ export default {
             account: computed(() => AppState.account),
             profile: computed(() => AppState.activeProfile),
             ads: computed(() => AppState.ads),
-            posts: computed(() => AppState.posts)
+            posts: computed(() => AppState.posts),
+            selectedProfile: computed(() => AppState.activeProfile)
         };
     },
-    components: { AdCard }
 }
 </script>
 

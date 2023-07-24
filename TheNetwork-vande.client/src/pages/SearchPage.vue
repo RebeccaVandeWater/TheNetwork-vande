@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <section class="row justify-content-center">
 
-      <div class="col-6">
+      <div class="col-12">
         <div class="elevation-2 bg-white p-3 mt-2">
           <form @submit.prevent="getPostsByQuery()">
             <label for="searchBar"></label>
@@ -17,7 +17,7 @@
       </div>
     </section>
     <section class="row flex-column align-items-center mt-4">
-      <div class="col-6 bg-white elevation-3 mb-4" v-for="post in posts" :key="post.id">
+      <div class="col-12 bg-white elevation-3 mb-4" v-for="post in posts" :key="post.id">
         <PostCard :post="post"/>
       </div>
       <div class="m-3" v-if="older">
@@ -50,6 +50,8 @@ export default {
 
         return {
             editable,
+
+            ads: computed(() => AppState.ads),
 
             posts: computed(() => AppState.posts),
 

@@ -25,6 +25,7 @@
 
       </form>
   </div>
+
 </template>
 
 
@@ -42,6 +43,8 @@ export default {
       editable,
 
       account: computed(() => AppState.account),
+
+      selectedProfile: computed(() => AppState.selectedProfile),
 
       async createPost() {
                 try {

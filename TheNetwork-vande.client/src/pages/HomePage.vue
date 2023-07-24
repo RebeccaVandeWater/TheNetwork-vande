@@ -2,7 +2,7 @@
   <div class="container-fluid bg-light">
     <section class="row justify-content-between">
 
-      <div class="col-md-3 col-12 mt-2">
+      <div class="col-md-6 col-12 mt-2">
         <div class="bg-white elevation-3 p-3" v-if="account.id">
           <ProfileCard />
         </div>
@@ -22,12 +22,6 @@
           </div>
       </div>
 
-      <div class="col-md-3 col-12 d-flex flex-column align-items-center">
-          <div v-for="ad in ads" :key="ad.title">
-            <AdCard :ad="ad" />
-          </div>
-      </div>
-
     </section>
   </div>
 </template>
@@ -38,7 +32,6 @@ import Pop from '../utils/Pop.js';
 import { postsService } from '../services/PostsService.js';
 import { AppState } from '../AppState.js';
 import { adsService } from '../services/AdsService.js';
-import AdCard from '../components/AdCard.vue';
 import PaginationComponent from '../components/PaginationComponent.vue';
 import CreatePostCard from '../components/CreatePostCard.vue';
 
@@ -79,9 +72,11 @@ export default {
 
             account: computed(() => AppState.account),
 
+
+
         };
     },
-    components: { AdCard, PaginationComponent, CreatePostCard }
+    components: { PaginationComponent, CreatePostCard }
 }
 </script>
 

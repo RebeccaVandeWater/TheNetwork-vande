@@ -2,8 +2,17 @@
   <header>
     <Navbar />
   </header>
-  <main>
-    <router-view />
+  <main class="container-fluid">
+    <section class="row">
+      <div class="col-9">
+        <router-view />
+      </div>
+      <div class="col-3">
+        <div v-for="ad in ads" :key="ad.title">
+          <AdCard :ad="ad" />
+        </div>
+      </div>
+    </section>
   </main>
   
 </template>
@@ -16,7 +25,8 @@ import Navbar from './components/Navbar.vue'
 export default {
   setup() {
     return {
-      appState: computed(() => AppState)
+      appState: computed(() => AppState),
+      ads: computed(() => AppState.ads)
     }
   },
   components: { Navbar }
