@@ -27,6 +27,7 @@
       </div>
     </div>
   </span>
+  
 </template>
 
 <script>
@@ -57,4 +58,5 @@ export default {
   object-fit: cover;
   object-position: center;
 }
+
 </style>

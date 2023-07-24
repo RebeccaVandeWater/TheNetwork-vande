@@ -7,7 +7,7 @@ class AdsService {
   async getAds() {
     const res = await api.get('/api/ads')
 
-    logger.log("Got ads?", res.data)
+    logger.log("[GOT ADS]", res.data)
 
     AppState.ads = res.data.map(pojo => new Ad(pojo))
   }

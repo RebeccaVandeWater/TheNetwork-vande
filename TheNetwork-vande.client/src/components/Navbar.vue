@@ -3,7 +3,7 @@
     <!-- FIXME Router doesn't work, not taken to home page? -->
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <p class="fs-3 m-3">
+        <p class="fs-3 m-2 header-font">
           Network
         </p>
       </div>
@@ -27,6 +27,9 @@
       <Login />
     </div>
   </nav>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Cinzel+Decorative&family=Concert+One&family=Forum&family=Indie+Flower&family=Kalam:wght@300&family=Kumar+One+Outline&family=Shadows+Into+Light&family=Shrikhand&family=Staatliches&display=swap" rel="stylesheet">
 </template>
 
 <script>
@@ -57,6 +60,10 @@ a:hover {
 .teal-gradient-bg{
   background: rgb(0,227,152);
   background: linear-gradient(90deg, rgba(0,227,152,1) 0%, rgba(9,214,191,0.9444152661064426) 35%, rgba(161,235,250,0.8099614845938375) 100%);
+}
+
+.header-font{
+  font-family: 'Kumar One Outline', cursive;
 }
 
 @media screen and (min-width: 768px) {

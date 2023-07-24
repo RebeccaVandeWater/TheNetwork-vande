@@ -8,7 +8,7 @@ class ProfilesService {
   async getProfile(profileId) {
     const res = await api.get(`api/profiles/${profileId}`)
 
-    logger.log("Got profile?", res.data)
+    logger.log("[GOT PROFILE]", res.data)
 
     const profile = new Profile(res.data)
 

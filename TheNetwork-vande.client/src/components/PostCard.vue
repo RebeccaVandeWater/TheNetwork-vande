@@ -1,10 +1,5 @@
 <template>
-  <div class="d-flex">
-    <div class="m-3">
-      <img class="img-fluid post-img" :src="post.imgUrl" :alt="post.creator.name" v-if="post.imgUrl">
-    </div>
-
-    <div class="m-3">
+    <div class="m-3 pt-3">
       <div class="d-flex">
         <p>
           <router-link :to="{ name:'Profile Page', params: {profileId: post.creatorId} }">
@@ -12,25 +7,35 @@
             <span class="ps-2 me-3"> {{ post.creator.name }} <i class="mdi mdi-account-school" v-if="post.creator.graduated"></i> </span>
           </router-link>
         </p>
-        <div v-if="account.id == post.creatorId">
-          <button @click="removePost()" class="btn btn-danger" type="button">
-            <i class="mdi mdi-delete "></i>
+        <div v-if="account.id == post.creatorId" class="text-end flex-fill">
+          <button @click="removePost()" class="btn delete-style rounded-pill" type="button">
+            <i class="mdi mdi-delete"></i>
           </button>
         </div>
       </div>
-      <div class="fs-4 mb-4">
-        {{ post.body }}
-        <p class="fs-5 like-color text-end mt-2">
-          <span class="pe-2">{{ post.likeIds.length }}</span>
-          <i @click="likePost()" v-if="account.id" type="button" class="mdi mdi-heart"></i>
-          <i v-else class="mdi mdi-heart"></i>
+      <div class="fs-5 mb-4 d-flex flex-column">
+        <p>
+          {{ post.body }}
         </p>
+        <img class="img-fluid post-img" :src="post.imgUrl" :alt="post.creator.name" v-if="post.imgUrl">
+        
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="fs-6 text-secondary">
+            {{ post.createdAt }}
+          </span>
+          <p class="fs-5 like-color text-end mt-2">
+            <span class="pe-2">{{ post.likeIds.length }}</span>
+            <span v-if="account.id">
+              <i @click="likePost()" v-if="post.likes.find(l => l.id == account.id)" :disabled="!account.id" type="button" class="mdi mdi-heart"></i>
+              <i @click="likePost()" v-else :disabled="!account.id" type="button" class="mdi mdi-heart-outline"></i>
+            </span>
+            <span v-else>
+              <i class="mdi mdi-heart-outline"></i>
+            </span>
+          </p>
+        </div>
       </div>
-      <span class="fs-6 text-secondary">
-        {{ post.createdAt }}
-      </span>
     </div>
-  </div>
 </template>
 
 
@@ -85,9 +90,8 @@ export default {
 
 <style lang="scss" scoped>
 .post-img{
-    height: 20vh;
-    width: 15vh;
-    object-fit: cover;
+    height: 30vh;
+    object-fit: contain;
     object-position: center;
   }
 
@@ -102,4 +106,14 @@ export default {
 .like-color{
   color: lightblue;
 }
+
+.delete-style{
+  color: rgb(233, 39, 39);
+}
+
+.delete-style:hover{
+  color: white;
+  background-color: rgb(233, 39, 39);
+}
+
 </style>

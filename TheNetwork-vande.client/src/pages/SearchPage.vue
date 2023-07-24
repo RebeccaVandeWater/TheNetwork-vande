@@ -29,7 +29,7 @@
 
 
 <script>
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { AppState } from '../AppState.js';
 import PostCard from '../components/PostCard.vue';
 import PaginationComponent from '../components/PaginationComponent.vue';
@@ -39,6 +39,15 @@ import { postsService } from '../services/PostsService.js';
 export default {
     setup() {
         const editable = ref({});
+
+        function clearPosts(){
+          postsService.clearPosts()
+        }
+
+        onMounted(() => {
+          clearPosts()
+        })
+
         return {
             editable,
 
@@ -53,6 +62,8 @@ export default {
                 const query = editable.value.query
 
                 await postsService.getPostsByQuery(query)
+
+                editable.value = {}
               } catch (error) {
                 Pop.error(error.message)
               }
